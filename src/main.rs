@@ -2,13 +2,13 @@
 // insane-british-anagram.rs - Find words that have valid anagrams
 //                             Words sourced from Debian's british-english-insane dictionary
 //
-// WARNING: This perhaps not the most readble way to write this algorithm, but it's fast!
+// WARNING: This perhaps not the most readable way to write this algorithm, but it's fast!
 //
 // See: Bare Metal WASM by Cliff L Biffle:
 //      https://users.rust-lang.org/t/writing-a-213-byte-webassembly-graphics-demo-with-rust/29099
 //      http://cliffle.com/blog/bare-metal-wasm/
 
-#![feature(test)]
+// #![feature(test)]
 
 #[cfg(unix)]
 extern crate jemallocator;
@@ -16,7 +16,7 @@ extern crate jemallocator;
 #[global_allocator]
 static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 
-extern crate test;
+// extern crate test;
 
 use arrayvec::ArrayVec;
 use hashbrown::HashMap; // Google's faster HashMap
@@ -187,15 +187,17 @@ pub fn start() -> Result<(), JsValue> {
     Ok(())
 }
 
+const SOURCE_PATH: &str = "../../www/british-english-insane.txt";
+
 fn main() {
-    match std::fs::read("/usr/share/dict/british-english-insane") {
+    match std::fs::read(SOURCE_PATH) {
         Ok(dictionary) => {
             let output = anagrams(&dictionary);
             let stdout = io::stdout();
             let mut stdout_handle = stdout.lock();
             match stdout_handle.write_all(output.as_bytes()) {
                 Ok(()) => {}
-                Err(e) => eprintln!("Error writing reult {}", e),
+                Err(e) => eprintln!("Error writing result {}", e),
             }
         }
         Err(e) => {
@@ -204,14 +206,14 @@ fn main() {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use test::Bencher;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     use test::Bencher;
 
-    #[bench]
-    fn bench_anagrams(b: &mut Bencher) {
-        let dictionary = std::fs::read("/usr/share/dict/british-english-insane").unwrap();
-        b.iter(|| anagrams(test::black_box(&dictionary)));
-    }
-}
+//     #[bench]
+//     fn bench_anagrams(b: &mut Bencher) {
+//         let dictionary = std::fs::read(SOURCE_PATH).unwrap();
+//         b.iter(|| anagrams(test::black_box(&dictionary)));
+//     }
+// }

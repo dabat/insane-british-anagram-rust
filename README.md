@@ -1,9 +1,8 @@
 # insane-british-anagram-rust
+
 Rust program to find anagrams in the Debian british-english-insane dictionary file.
 
-This is my first ever Rust program. You will find a number of different attempts at it here. By default it builds the latest fastest incarnation.
-
-
+This is my first ever Rust program. You will find a number of different attempts at it here. By default it builds the latest, fastest incarnation.
 
 ## Prerequisits
 
@@ -17,14 +16,13 @@ This is my first ever Rust program. You will find a number of different attempts
 
 Note: The version of wasm-bindgen-cli must match the version of wasm-bingen specified in Cargo.toml. Be sure to change both if upgrading.
 
-
 ## Build
 
 The build.sh script will build the anagram finder as a native executable and as WASM for node.js and the web.
 
     $ cargo clean
     $ ./build.sh
-    
+
 ## Run
 
 The native executable: (Runs the anagram finder twice and prints execution time to stderr.
@@ -43,16 +41,16 @@ Under node.js
 As a web page:
 
     $ ./target/release/insane_http
-    
-And visit http://localhost:9000/www/
 
-## WTF ?!!
+And visit http://localhost:9000/
 
-Do you notice the execution times above? How is it possible that it runs faster when built as WASM than as a native x86-64 executable.
+## Wut?!!
+
+Do you notice the execution times above? How is it possible that it runs faster when built as WASM than as a native x86-64 executable?! 🚀
 
 ## Tags
 
-v0.1.1  Swapped HashMap to Google's HashBrown:
+v0.1.1 Swapped HashMap to Google's HashBrown:
 
     $ ./target/release/insane-british-anagram > anagrams.txt
     450ms
@@ -76,7 +74,6 @@ v0.1.3 Using jemallocator, with spectacular results!
     $ time ./target/release/insane-british-anagram > anagrams.txt
     324ms
     79ms
-
 
 ## Timings on a Raspberry Pi 3 and Buster:
 
@@ -103,11 +100,3 @@ v0.1.3 Using jemallocator:
     $ time target/release/insane-british-anagram > anagrams.txt
     664ms
     571ms
-
-
-
-
-
-
-
-
